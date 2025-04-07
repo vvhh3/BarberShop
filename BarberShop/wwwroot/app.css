@@ -62,7 +62,7 @@ h1:focus {
 
 .Barber{
     max-width: 1920px;
-    height: 2925px;
+    height: 2750px;
     max-height: 2925px;
 }
 .head-text{
@@ -161,9 +161,106 @@ h1:focus {
 }
 .service-text{
     font-size: 32px;
+    font-weight: bold;
     color: white;
 }
 .service-price{
     font-size: 32px;
     color:#FCA311 ;
 }
+.photo-div{
+    margin-top: 110px;
+    display: flex;
+    justify-content: center;
+}
+.photo-text{
+    font-size: 32px;
+    color:#FCA311;
+}
+.photo-block{
+    margin: 50px 70px 0px 70px;
+    display: flex;
+    max-width: 1900px;
+    width: 1800px;
+    flex-wrap: wrap;
+}
+.img-block{
+    width: 550px;
+    margin-right: 60px;
+    height: 450px;
+    margin-bottom: 80px;
+}
+.img-block-1{
+    width: 550px;
+    height: 450px;
+    margin-right: 60px;
+    margin-bottom: 80px;
+}
+.img-block-2{
+    width: 550px;
+    height: 450px;
+    margin-bottom: 80px;
+}
+.img-block-3{
+    width: 550px;
+    height: 450px;
+    margin-right: 60px;
+}
+.img-block-4{
+    width: 550px;
+    height: 450px;
+    margin-right: 60px;
+}
+.img-block-5{
+    width: 550px;
+    height: 450px;
+}
+.footer{
+    display: flex;
+    justify-content: center;
+    margin-top: 80px;
+}
+.footer-title{
+    font-size: 40px;
+    color: white;
+}
+.feedbeek{
+    margin: 30px 70px 0px 70px;
+    display: flex;
+    justify-content: space-between;
+}
+.fee{
+    display: flex;
+    flex-direction: column;
+}
+.feedbeek-title{
+    color: white;
+    font-size: 36px;
+}
+.feedbeek-2{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.feedbeek-title-2{
+    font-size: 36px;
+    color: #FCA311;
+}
+.feedbeek-text{
+    font-size: 32px;
+    color: white;
+    text-decoration: none;
+}
+.feedbeek-3{
+    display: flex;
+    flex-direction: column;
+}
+.feedbeek-time{
+    font-size: 36px;
+    color: #FCA311;
+}
+.feedbeek-time-2{
+    font-size: 32px;
+    color: white;
+}
+
