@@ -1,0 +1,26 @@
+@page "/AddService"
+@inject BarberShopContext ef
+@using BarberShop.Models
+@using BarberShop.DataBase
+<h3>AddService</h3>
+<EditForm FormName="formAddItem" Model="_service" OnValidSubmit="@Submit">
+    <DataAnnotationsValidator></DataAnnotationsValidator>
+    <p>Название услуги</p>
+    <input type="text" @bind-value="_service.Title"/>
+    <p>Описание услгуи</p>
+    <input type="text" @bind-value="_service.Description"/>    
+    <p>Цена услуги</p>
+    <input type="text" @bind-value="_service.Price"/>
+    <button type="submit">ДОБАВИТЬ ИГРУ</button>
+</EditForm>
+
+@code {
+    private Service _service { get; set; }
+    
+    public void Submit(EditContext args)
+    {
+        ef.Add(_service);
+        ef.SaveChanges();
+        _service = new Service();
+    }
+}

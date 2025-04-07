@@ -1,11 +1,13 @@
 using BarberShop.Components;
+using BarberShop.DataBase;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
-
+builder.Services.AddDbContext<BarberShopContext>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -24,5 +26,9 @@ app.UseAntiforgery();
 app.MapStaticAssets();
 app.MapRazorComponents<App>()
     .AddInteractiveServerRenderMode();
-
+using (var ServiceScope = app.Services.CreateScope())
+{
+    var context = ServiceScope.ServiceProvider.GetRequiredService<BarberShopContext>();
+    context.Database.Migrate();
+}
 app.Run();
