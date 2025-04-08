@@ -1,0 +1,35 @@
+@page "/AddMaster"
+@inject BarberShopContext ef
+@using BarberShop.Models
+@using BarberShop.DataBase
+@rendermode InteractiveServer
+
+<EditForm FormName="formAddItem" Model="_master" OnValidSubmit="@SubmitMaster" class="form">
+    <DataAnnotationsValidator></DataAnnotationsValidator>
+    <p>Введите имя мастера</p>
+    <input type="text" class="input" @bind-value="_master.Name"/>
+    <p>Профессию мастера</p>
+    <input type="text" class="input" @bind-value="_master.Profession"/>
+    <p>Опыт работы</p>
+    <input type="text" class="input" @bind-value="_master.Experience"/>
+    <button type="submit">ДОБАВИТЬ МАСТЕРА</button>
+</EditForm>
+<table class="tab">
+    @foreach (var item in ef.Masters)
+    {
+        <tr>
+            <td class="tab-td">@item.Name</td>
+            <td class="tab-td"> <a href="@($"/EditMaster/{@item.Id}")" class="tab-a">РЕДАКТИРОВАТЬ МАСТЕРА</a></td>
+        </tr>
+    }
+</table>
+@code {
+    private Master _master = new Master();
+
+    public void SubmitMaster(EditContext args)
+    {
+        ef.Add(_master);
+        ef.SaveChanges();
+        _master = new Master();
+    }
+}

@@ -1,6 +1,56 @@
-@page "/EditService"
-<h3>EditService</h3>
+@page "/EditService/{id:int}"
+@using BarberShop.Models
+@inject NavigationManager NavigationManager
+@using BarberShop.DataBase
+@inject BarberShopContext ef
+@rendermode InteractiveServer
+
+@if (_service is not null)
+{
+    <EditForm FormName="formAddItem" Model="_service" OnValidSubmit="@Save" class="form">
+        <DataAnnotationsValidator></DataAnnotationsValidator>
+        <p>Название игры</p>
+        <input type="text" class="input" @bind-value="_service.Title"/>
+        <p>Описание</p>
+        <input type="text" class="input" @bind-value="_service.Description"/>
+        <p>Цена Услуги</p>
+        <input type="text" class="input" @bind-value="_service.Price"/>
+        <button type="submit">ИЗМЕНИТЬ УСЛУГУ</button>
+    </EditForm>
+}
+<button @onclick="GoService">Обратно</button>
+<button @onclick="DeleteService">Удалить услугу</button>
 
 @code {
     
+    private string text { get; set; } = "/AddService";
+    [Parameter] public int Id { get; set; }
+
+    private Service _service;
+
+    protected override void OnInitialized()
+    {
+        _service = ef.Servicess.FirstOrDefault(x => x.Id == Id);
+    }
+
+    protected void Save()
+    {
+        if (_service is null) return;
+        {
+            ef.Update(_service);
+            ef.SaveChanges();
+        }
+    }
+
+    public void DeleteService()
+    {
+        ef.Remove(_service);
+        ef.SaveChanges();
+    }
+
+    private void GoService()
+    {
+        NavigationManager.NavigateTo(text);
+    }
+
 }

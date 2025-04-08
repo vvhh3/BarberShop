@@ -1,0 +1,38 @@
+@page "/EditMaster/{id:int}"
+@using BarberShop.Models
+@inject NavigationManager NavigationManager
+@using BarberShop.DataBase
+@inject BarberShopContext ef
+@rendermode InteractiveServer
+@if (_master is not null)
+{
+    <EditForm FormName="formAddItem" Model="_master" OnValidSubmit="@SaveMaster" class="form">
+        <DataAnnotationsValidator></DataAnnotationsValidator>
+        <p>Имя мастера</p>
+        <input type="text" class="input" @bind-value="_master.Name"/>
+        <p>Профессия мастера</p>
+        <input type="text" class="input" @bind-value="_master.Profession"/>
+        <p>Опыт работы</p>
+        <input type="text" class="input" @bind-value="_master.Experience"/>
+        <button type="submit">ИЗМЕНИТЬ УСЛУГУ</button>
+    </EditForm>
+}
+@code {
+    private Master _master;
+    [Parameter]public int Id { get; set; }
+
+    protected override void OnInitialized()
+    {
+        _master = ef.Masters.FirstOrDefault(x => x.Id == Id);
+    }
+
+    protected void SaveMaster()
+    {
+        if (_master is null)return;
+        {
+            ef.Update(_master);
+            ef.SaveChanges();
+        }
+    }
+
+}

@@ -1,15 +1,19 @@
 ﻿@page "/"
+@inject BarberShopContext ef
+@inject NavigationManager NavigationManager
+@using BarberShop.Models
+@using BarberShop.DataBase
 @rendermode InteractiveServer
 <PageTitle>Home</PageTitle>
 <div class="Barber">
     <div class="head-text">
         <p class="title">BARBERSHOP<br/>YoungBoy</p>
         <div class="head-text-2">
-            <p class="title-text">УСЛУГИ</p>
-            <p class="title-text">ОТЗЫВЫ</p>
-            <p class="title-text">МАСТЕРА</p>
-            <p class="title-text">КОНТАКТЫ</p>
-            <button class="title-btn">ЗАПИСАТЬСЯ</button>
+            <a class="title-text" href="#Service">УСЛУГИ</a>
+            <a class="title-text">ОТЗЫВЫ</a>
+            <a class="title-text">МАСТЕРА</a>
+            <a class="title-text" href="#feedbeak">КОНТАКТЫ</a>
+            <button class="title-btn" @onclick="GoToRecord">ЗАПИСАТЬСЯ</button>
         </div>
         <div class="head-text-3">
             <p class="samara-title">САМАРА</p>
@@ -28,29 +32,22 @@
         <p class="main-text-1">YoungBoy-стрижки</p>
         <p class="main-text-1">для тех, кто ценит время</p>
     </div>
-    <div class="main-text-2">
+    <div class="main-text-2" id="Service">
         <p class="main-title">УСЛУГИ И ЦЕНЫ</p>
         <p class="main-title-2">СТРИЖЕМ И БРЕЕМ</p>
     </div>
     <div class="service">
-        <div class="service-1">
-            <p class="service-text"> СТРИЖКА МУЖСКАЯ</p>
-            <p class="service-price">1000</p>
-        </div>
-        <div class="service-1">
-            <p class="service-text"> СТРИЖКА ДЕТСКАЯ</p>
-            <p class="service-price">800</p>
-        </div>
-        <div class="service-1">
-            <p class="service-text"> КОРЕКЦИЯ БОРОДЫ</p>
-            <p class="service-price">1200</p>
-        </div>
+        @foreach (var item in ef.Servicess.ToList())
+        {
+            <div class="service-1">
+                <p class="service-text"> @item.Title</p>
+                <p class="service-price">@item.Price</p>
+            </div>
+        }
     </div>
-
     <div class="photo-div">
         <p class="photo-text">ФОТО И ПРИМЕРЫ РАБОТ</p>
     </div>
-
     <div class="photo-block">
         <img src="image/master-1.jpg" class="img-block"/>
         <img src="image/master-2.jpg" class="img-block-1"/>
@@ -59,18 +56,17 @@
         <img src="image/фото-2.webp" class="img-block-4"/>
         <img src="image/фото-3.jpg" class="img-block-5"/>
     </div>
-
     <div class="footer">
         <p class="footer-title">СВЯЗАТЬСЯ С НАМИ</p>
     </div>
-    <div class="feedbeek">
+    <div class="feedbeek" id="feedbeak">
         <div class="fee">
             <p class="feedbeek-title">YoungBoy</p>
             <p class="feedbeek-title">+7 (987) 923-67-45</p>
         </div>
         <div class="feedbeek-2">
             <p class="feedbeek-title-2">МЫ В СОЦСЕТЯХ</p>
-            <a class="feedbeek-text" href="#">TELEGRAM</a>
+            <a class="feedbeek-text" href="https://t.me/ia_botik">TELEGRAM</a>
             <a class="feedbeek-text" href="#">ВКОНТАКТЕ</a>
         </div>
         <div class="feedbeek-3">
@@ -78,4 +74,15 @@
             <p class="feedbeek-time-2">ПН-ВС | 10:00-20:00</p>
         </div>
     </div>
+
 </div>
+
+@code
+{
+    private string text { get; set; } = "/RecordOfService";
+
+    private void GoToRecord()
+    {
+        NavigationManager.NavigateTo(text);
+    }
+}
