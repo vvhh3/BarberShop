@@ -1,3 +1,4 @@
+using System.Net;
 using BarberShop.Components;
 using BarberShop.DataBase;
 using Microsoft.EntityFrameworkCore;
@@ -8,6 +9,11 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 builder.Services.AddDbContext<BarberShopContext>();
+builder.WebHost.ConfigureKestrel((context, serverOptions) =>
+{
+    serverOptions.Listen(IPAddress.Loopback, 5000);
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

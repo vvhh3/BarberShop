@@ -1,0 +1,58 @@
+@page "/Record"
+@using BarberShop.DataBase
+@using BarberShop.Models
+@inject BarberShopContext ef
+@rendermode InteractiveServer
+
+<EditForm Model="_client" OnValidSubmit="@SaveClient" FormName="FormAddItem" class="form">
+    <DataAnnotationsValidator></DataAnnotationsValidator>
+    <p>Введите своё имя</p>
+    <input type="text" class="input" @bind-value="_client.Name"/>
+    <p>Введите свой номер телефона</p>
+    <input type="text" class="input" @bind-value="_client.Phone"/>
+    <p>Введите свою почту</p>
+    <input type="text" class="input" @bind-value="_client.Email"/>
+    <p>Выберите дату</p>
+    <input type="date" class="input" @bind-value="_record.DateOfRecord"/>
+    <p>Выберите время</p>
+    <input type="time" class="input" @bind-value="_record.TimeOfRecord"/>
+    <p>Выберите услуг</p>
+    <select class="input" @bind="@_record.ServiceId">
+        @foreach (var item in ef.Servicess.ToList())
+        {
+            <option value="@item.Id">@item.Title</option>
+        }
+    </select>
+    <p>Выберите мастера</p>
+    <select class="input" @bind="@_record.MasterId">
+        @foreach (var item in ef.Masters.ToList())
+        {
+            <option value="@item.Id">@item.Name</option>
+        }
+    </select>
+
+    <button type="submit">ЗАПИСАТЬСЯ</button>
+</EditForm>
+
+@code {
+    private Client _client = new Client();
+    private RecordOfService _record = new RecordOfService();
+
+    private void SaveClient(EditContext args)
+    {
+        
+        ef.Add(_client);
+        GetClientId();
+        ef.Add(_record);
+        ef.SaveChanges();
+        _client = new Client();
+        _record = new RecordOfService();
+    }
+
+    private void GetClientId()
+    {
+        var rec = ef.RecordOfServicess.FirstOrDefault(c => c.ClientId == _client.Id);
+        rec.Id = (int)_record.ClientId!;
+    }
+
+}

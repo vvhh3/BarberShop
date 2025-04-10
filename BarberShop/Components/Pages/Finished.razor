@@ -1,0 +1,37 @@
+@page "/Finished"
+@using BarberShop.DataBase
+@using Microsoft.EntityFrameworkCore
+@inject BarberShopContext ef
+@rendermode InteractiveServer
+<table class="tab">
+    <th class="tab-td">Имя пользователя</th>
+    <th class="tab-td">Имя мастера</th>
+    <th class="tab-td">Услуга</th>
+    <th class="tab-td">Дата записи</th>
+    <th class="tab-td">Время записи</th>
+    @foreach (var item in ef.RecordOfServicess
+                  .Include(x => x.Master)
+                  .Include(x => x.Service)
+                  .Include(d => d.Client)
+                  .ToList())
+    {
+        <tr>
+            <td class="tab-td">@item.Client?.Name</td>
+            <td class="tab-td">@item.Master?.Name</td>
+            <td class="tab-td">@item.Service?.Title</td>
+            <td class="tab-td">@item.DateOfRecord.ToString("d")</td>
+            <td class="tab-td">@item.TimeOfRecord.ToString("T")</td>
+        </tr>
+    }
+</table>
+    @* @foreach (var item1 in ef.RecordOfServicess *@
+    @*               .Include(a => a.Master) *@
+    @*               .Include(x => x.Service) *@
+    @*               .ToList()) *@
+    @* { *@
+    @* @item1.Master?.Name *@
+    @* @item1.Service?.Title *@
+    @* } *@
+@code {
+    
+}

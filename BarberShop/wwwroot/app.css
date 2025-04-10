@@ -306,6 +306,17 @@ h1:focus {
     font-size: 20px;
 }
 
+.form select{
+    height: 35px;
+    outline: none;
+    border: 2px solid orange;
+    background: transparent;
+    border-radius: 5px;
+    transition: .5s;
+    color: #FCA311;
+    font-size: 20px;
+}
+
 .form input:focus {
     background: orange;
 }

@@ -14,8 +14,10 @@ public class RecordOfService
     
     public int? MasterId { get; set; }
     [ForeignKey("MasterId")] public Master? Master { get; set; }
-    
-    public DateTime DateOfRecord { get; set; }
-    
-    public DateTime TimeOfRecord { get; set; }
+
+    [Required(ErrorMessage = "Дата обязательна")]public DateTime DateOfRecord { get; set; } = DateTime.Today;
+
+
+    [Required(ErrorMessage = "Время обязательно")]
+    public DateTime TimeOfRecord { get; set; } = new DateTime(DateTime.Now.Year,DateTime.Now.Month,DateTime.Now.Day,10,00,0);
 }
