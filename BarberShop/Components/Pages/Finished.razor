@@ -13,6 +13,11 @@
                   .Include(x => x.Master)
                   .Include(x => x.Service)
                   .Include(d => d.Client)
+                  .OrderBy(f => f.Client!.Name)
+                  .OrderBy(d => d.Master!.Name)
+                  .OrderBy(a => a.Service!.Title)
+                  .OrderBy(z => z.DateOfRecord)
+                  .OrderBy(c => c.TimeOfRecord)
                   .ToList())
     {
         <tr>
@@ -24,14 +29,7 @@
         </tr>
     }
 </table>
-    @* @foreach (var item1 in ef.RecordOfServicess *@
-    @*               .Include(a => a.Master) *@
-    @*               .Include(x => x.Service) *@
-    @*               .ToList()) *@
-    @* { *@
-    @* @item1.Master?.Name *@
-    @* @item1.Service?.Title *@
-    @* } *@
+
 @code {
     
 }

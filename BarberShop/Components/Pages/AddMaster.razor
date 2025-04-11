@@ -15,7 +15,8 @@
     <button type="submit">ДОБАВИТЬ МАСТЕРА</button>
 </EditForm>
 <table class="tab">
-    @foreach (var item in ef.Masters)
+    @foreach (var item in ef.Masters
+                  .OrderBy(x=>x.Name).ToList())
     {
         <tr>
             <td class="tab-td">@item.Name</td>

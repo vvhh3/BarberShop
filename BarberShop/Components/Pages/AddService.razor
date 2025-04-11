@@ -17,11 +17,13 @@
 </EditForm>
 
 <table class="tab">
-    @foreach (var item in ef.Servicess)
+    @foreach (var item in ef.Servicess
+                  .OrderBy(x=>x.Title)
+                  .ToList())
     {
     <tr>
         <td class="tab-td">@item.Title</td>
-        <th class="tab-td"><a href="@($"/EditService/{@item.Id}")" class="tab-a"> ИЗМЕНИТЬ ИГРУ</a></th>
+        <th class="tab-td"><a href="@($"/EditService/{@item.Id}")" class="tab-a">ИЗМЕНИТЬ ИГРУ</a></th>
     </tr> 
     }
 </table>

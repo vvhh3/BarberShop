@@ -18,6 +18,7 @@
     <input type="time" class="input" @bind-value="_record.TimeOfRecord"/>
     <p>Выберите услуг</p>
     <select class="input" @bind="@_record.ServiceId">
+        <option selected>Выберите услугу</option>
         @foreach (var item in ef.Servicess.ToList())
         {
             <option value="@item.Id">@item.Title</option>
@@ -25,6 +26,7 @@
     </select>
     <p>Выберите мастера</p>
     <select class="input" @bind="@_record.MasterId">
+        <option selected>Выберите мастера</option>
         @foreach (var item in ef.Masters.ToList())
         {
             <option value="@item.Id">@item.Name</option>
@@ -42,6 +44,7 @@
     {
         
         ef.Add(_client);
+        ef.SaveChanges();
         GetClientId();
         ef.Add(_record);
         ef.SaveChanges();
@@ -51,8 +54,7 @@
 
     private void GetClientId()
     {
-        var rec = ef.RecordOfServicess.FirstOrDefault(c => c.ClientId == _client.Id);
-        rec.Id = (int)_record.ClientId!;
+        _record.ClientId = _client.Id;
     }
 
 }

@@ -14,11 +14,18 @@
         <input type="text" class="input" @bind-value="_master.Profession"/>
         <p>Опыт работы</p>
         <input type="text" class="input" @bind-value="_master.Experience"/>
-        <button type="submit">ИЗМЕНИТЬ УСЛУГУ</button>
+        <button type="submit">ИЗМЕНИТЬ МАСТЕРА</button>
     </EditForm>
+    <div class="btn-div">
+            <button @onclick="DeleteMaster" class="btn-delete">УДАЛИТЬ МАСТЕРА</button>
+            <button @onclick="GoToEdit" class="btn-delete">ОБРАТНО</button>
+    </div>
+
 }
+
 @code {
     private Master _master;
+    private string path { get; set; } = "/AddMaster";
     [Parameter]public int Id { get; set; }
 
     protected override void OnInitialized()
@@ -33,6 +40,17 @@
             ef.Update(_master);
             ef.SaveChanges();
         }
+    }
+
+    private void DeleteMaster()
+    {
+        ef.Remove(_master);
+        ef.SaveChanges();
+    }
+
+    private void GoToEdit()
+    {
+        NavigationManager.NavigateTo(path);
     }
 
 }

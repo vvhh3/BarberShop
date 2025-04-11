@@ -1,6 +1,6 @@
 ﻿@* http://127.0.0.1:5000 *@
 @page "/"
-@* @inject BarberShopContext ef *@
+@inject BarberShopContext ef
 @inject NavigationManager NavigationManager
 @using BarberShop.DataBase
 @rendermode InteractiveServer
@@ -11,7 +11,6 @@
         <div class="head-text-2">
             <a class="title-text" href="#Service">УСЛУГИ</a>
             <a class="title-text">ОТЗЫВЫ</a>
-            <a class="title-text">МАСТЕРА</a>
             <a class="title-text" href="#feedbeak">КОНТАКТЫ</a>
             <button class="title-btn" @onclick="GoToRecord">ЗАПИСАТЬСЯ</button>
         </div>
@@ -37,14 +36,14 @@
         <p class="main-title-2">СТРИЖЕМ И БРЕЕМ</p>
     </div>
     <div class="service">
-        @* @foreach (var item in ef.Servicess.ToList()) *@
-        @* { *@
-        @*     <div class="service-1"> *@
-        @*         <p class="service-text"> @item.Title</p> *@
-        @*         <p class="service-price">@item.Price</p> *@
-        @*     </div> *@
-        @* } *@
-    </div>
+        @foreach (var item in ef.Servicess.ToList())
+        {
+            <div class="service-1">
+                <p class="service-text"> @item.Title</p>
+                <p class="service-price">@item.Price</p>
+            </div>
+        }
+    </div>   
     <div class="photo-div">
         <p class="photo-text">ФОТО И ПРИМЕРЫ РАБОТ</p>
     </div>
@@ -79,7 +78,7 @@
 
 @code
 {
-    private string text { get; set; } = "/RecordOfService";
+    private string text { get; set; } = "/Record";
 
     private void GoToRecord()
     {

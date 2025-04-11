@@ -18,8 +18,10 @@
         <button type="submit">ИЗМЕНИТЬ УСЛУГУ</button>
     </EditForm>
 }
-<button @onclick="GoService">Обратно</button>
-<button @onclick="DeleteService">Удалить услугу</button>
+    <div class="btn-div">
+            <button @onclick="DeleteService" class="btn-delete">УДАЛИТЬ УСЛУГУ</button>
+            <button @onclick="GoService" class="btn-delete">ОБРАТНО</button>
+    </div>
 
 @code {
     
