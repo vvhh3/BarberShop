@@ -1,5 +1,6 @@
-﻿@page "/"
-@inject BarberShopContext ef
+﻿@* http://127.0.0.1:5000 *@
+@page "/"
+@* @inject BarberShopContext ef *@
 @inject NavigationManager NavigationManager
 @using BarberShop.DataBase
 @rendermode InteractiveServer
@@ -36,13 +37,13 @@
         <p class="main-title-2">СТРИЖЕМ И БРЕЕМ</p>
     </div>
     <div class="service">
-        @foreach (var item in ef.Servicess.ToList())
-        {
-            <div class="service-1">
-                <p class="service-text"> @item.Title</p>
-                <p class="service-price">@item.Price</p>
-            </div>
-        }
+        @* @foreach (var item in ef.Servicess.ToList()) *@
+        @* { *@
+        @*     <div class="service-1"> *@
+        @*         <p class="service-text"> @item.Title</p> *@
+        @*         <p class="service-price">@item.Price</p> *@
+        @*     </div> *@
+        @* } *@
     </div>
     <div class="photo-div">
         <p class="photo-text">ФОТО И ПРИМЕРЫ РАБОТ</p>

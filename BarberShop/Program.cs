@@ -9,10 +9,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 builder.Services.AddDbContext<BarberShopContext>();
-builder.WebHost.ConfigureKestrel((context, serverOptions) =>
-{
-    serverOptions.Listen(IPAddress.Loopback, 5000);
-});
+
+
 
 var app = builder.Build();
 
