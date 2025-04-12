@@ -203,6 +203,10 @@ h1:focus {
     justify-content: space-between;
     max-width: 720px;
     width: 720px;
+    transition: .7s;
+}
+.service-1:hover{
+    background: #ffffff0d;
 }
 .service-text{
     font-size: 32px;
@@ -411,5 +415,135 @@ h1:focus {
 .btn-delete:hover{
     background: white;
     color: #FCA311;
+}
+
+@media (max-width: 440px) {
+    .Barber{
+        height: 2626px;
+        max-height: 2630px;
+    }
+    .head-text{
+        margin: 10px 15px 10px 15px;
+    }
+    .title{
+        font-size: 20px;
+    }
+    .head-text-2{
+        margin-left: 20px;
+    }
+    .title-text{
+        font-size: 15px;
+        margin-left: 10px;
+    }
+    .title-btn{
+        font-size: 15px;
+        margin-left: 10px;
+        
+    }
+    .samara-title{
+        color: black;
+    }
+    .head-data{
+        margin: 0px 0px 0px 15px;
+    }
+    .head-data-title{
+        font-size: 15px;
+        margin-bottom: 5px;
+    }
+    .head-data-text{
+        font-size: 15px;
+    }
+    .line{
+        width: 267px;
+    }
+    .main-text-1{
+        font-size: 24px;
+    }
+    .main-text-2{
+        margin-top: 50px;
+    }
+    .main-title{
+        font-size: 20px;
+    }
+    .main-title-2{
+        font-size: 20px;
+    }
+    .service{
+        margin-top: 30px;
+    }
+    .service-1{
+        width: 400px;
+    }
+    .service-text{
+        font-size: 15px;
+    }
+    .service-price{
+        font-size: 15px;
+    }
+    .photo-div{
+        margin-top: 50px;
+    }
+    .photo-text{
+        font-size: 20px;
+    }
+    .photo-block{
+        margin: 50px 65px 0px 65px;
+        flex-direction: column;
+    }
+    .img-block{
+        width: 300px;
+        height: 300px;
+        margin-bottom: 30px;
+    }
+    .img-block-1{
+        width: 300px;
+        height: 300px;
+        margin-bottom: 30px;
+    }
+    .img-block-2{
+        width: 300px;
+        height: 300px;
+        margin-bottom: 30px;
+    }
+    .img-block-3{
+        width: 300px;
+        height: 300px;
+        margin-bottom: 30px;
+    }
+    .img-block-4{
+        width: 300px;
+        height: 300px;
+        margin-bottom: 30px;
+    }
+    .img-block-5{
+        width: 300px;
+        height: 300px;
+        margin-bottom: 30px;
+    }
+    .footer{
+        margin-top: 50px;
+    }
+    .footer-title{
+        font-size: 24px;
+    }
+    .feedbeek{
+        margin: 30px 15px 0px 15px;
+    }
+    .feedbeek-title{
+        font-size: 15px;
+    }
+    .feedbeek-2{
+        justify-content: end;
+    }
+    .feedbeek-title-2{
+        font-size: 15px;
+    }
+    .feedbeek-text{
+        font-size: 15px;
+    }
+    .feedbeek-3{
+        display: none;
+    }
+    
 }
 
