@@ -10,6 +10,8 @@ public class BarberShopContext : DbContext
     public DbSet<RecordOfService> RecordOfServicess { get; set; }
     public DbSet<Service> Servicess { get; set; }
     
+    public DbSet<Back> Backs { get; set; }
+    
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         base.OnConfiguring(optionsBuilder);

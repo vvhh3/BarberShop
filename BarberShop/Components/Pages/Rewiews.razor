@@ -1,0 +1,54 @@
+@page "/Rewiews"
+@inject BarberShopContext ef
+@using BarberShop.Models
+@using BarberShop.DataBase
+@rendermode InteractiveServer
+
+<EditForm Model="_back" FormName="AddRewiews" OnValidSubmit="@SubmitRewiews" class="form">
+    <DataAnnotationsValidator></DataAnnotationsValidator>
+    <p>Введите текст для отзва</p>
+    <input  class="input" @bind-value="@_back.Text" type="text"/>
+    <p>Введите кол-во звёзд</p>
+    <input class="input" @bind-value="@_back.Stars" type="number"/>
+    <button type="submit"> ДОБАВИТЬ ОТЗЫВ</button>
+</EditForm>
+<div class="Rew">
+    <div class="Rewiews">
+        @foreach (var item in ef.Backs.ToList())
+        {
+            <div class="Rewiews-block">
+                <div class="block">
+                    <img src="image/master-1.jpg"/>
+                    <div class="Rewiews-stars">
+                    @for (int i=0; i<5; i++)
+                    {
+                        @if (i <= @item.Stars)
+                        {
+                            <p>★</p>
+                        }
+                        else
+                        {
+                            <p>☆</p>
+                        }
+                    }</div>
+                @* <p class="Rewiews-stars">@item.Stars</p> *@
+                </div>
+                <div class="Rewiwews-div-text">
+                    <p class="Rewiews-text">@item.Text</p>
+
+                </div>
+            </div>
+        }
+    </div>
+    </div>
+@code {
+    
+    private Back _back = new Back();
+
+    public void SubmitRewiews(EditContext args)
+    {
+        ef.Add(_back);
+        ef.SaveChanges();
+        _back = new Back();
+    }
+}
