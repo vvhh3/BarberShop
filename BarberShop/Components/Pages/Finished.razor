@@ -9,15 +9,16 @@
     <th class="tab-td">Услуга</th>
     <th class="tab-td">Дата записи</th>
     <th class="tab-td">Время записи</th>
+    <th class="tab-td">Удалить</th>
     @foreach (var item in ef.RecordOfServicess
                   .Include(x => x.Master)
                   .Include(x => x.Service)
                   .Include(d => d.Client)
                   .OrderBy(f => f.Client!.Name)
-                  .OrderBy(d => d.Master!.Name)
-                  .OrderBy(a => a.Service!.Title)
-                  .OrderBy(z => z.DateOfRecord)
-                  .OrderBy(c => c.TimeOfRecord)
+                  .ThenBy(d => d.Master!.Name)
+                  .ThenBy(a => a.Service!.Title)
+                  .ThenBy(z => z.DateOfRecord)
+                  .ThenBy(c => c.TimeOfRecord)
                   .ToList())
     {
         <tr>
@@ -26,6 +27,7 @@
             <td class="tab-td">@item.Service?.Title</td>
             <td class="tab-td">@item.DateOfRecord.ToString("d")</td>
             <td class="tab-td">@item.TimeOfRecord.ToString("T")</td>
+            <button @onclick="() => DeleteRecord(item.Id)">Удалить</button>
         </tr>
     }
 </table>
@@ -33,6 +35,14 @@
 
 @code {
 
-    
-
+    private void DeleteRecord(int recordId)
+    {
+            var recordToDelete = ef.RecordOfServicess.Find(recordId);
+            
+            if (recordToDelete != null)
+            {
+                ef.RecordOfServicess.Remove(recordToDelete);
+                ef.SaveChanges();
+            }
+    }
 }
