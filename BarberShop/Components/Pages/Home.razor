@@ -3,8 +3,9 @@
 @inject BarberShopContext ef
 @inject NavigationManager NavigationManager
 @using BarberShop.DataBase
+@using System.Timers;
 @rendermode InteractiveServer
-<PageTitle>Home</PageTitle>
+
 <div class="Barber">
     <div class="head-text">
         <p class="title">BARBERSHOP<br/>YoungBoy</p>
@@ -48,12 +49,9 @@
         <p class="photo-text">ФОТО И ПРИМЕРЫ РАБОТ</p>
     </div>
     <div class="photo-block">
-        <img src="image/master-1.jpg" class="img-block"/>
-        <img src="image/master-2.jpg" class="img-block-1"/>
-        <img src="image/master-3.jpg" class="img-block-2"/>
-        <img src="image/фото-1.png" class="img-block-3"/>
-        <img src="image/фото-2.webp" class="img-block-4"/>
-        <img src="image/фото-3.jpg" class="img-block-5"/>
+        <button @onclick="GotoBackImg" class="btn-img" >←</button>
+        <img src="@_imgPuth[_count]" class="img-block"/>
+        <button @onclick="GotoNextImg" class="btn-img">→</button>
     </div>
     <div class="footer">
         <p class="footer-title">СВЯЗАТЬСЯ С НАМИ</p>
@@ -78,6 +76,39 @@
 
 @code
 {
+    private IList<string> _imgPuth = new List<string>()
+    {
+        "image/master-1.jpg",
+        "image/master-2.jpg",
+        "image/master-3.jpg",
+        "image/фото-1.png",
+        "image/фото-2.webp",
+        "image/фото-3.jpg"
+    };
+    private int _count { get; set; }
+
+    protected override void OnInitialized()
+    {
+         Timer timer = new Timer(5000);
+         timer.Elapsed += OnTimedEvent;
+        timer.Start();
+    }
+    
+
+    private async void OnTimedEvent(object source, ElapsedEventArgs e)
+    {
+        GotoNextImg();
+        await InvokeAsync(StateHasChanged);
+    }
+    
+    private void GotoNextImg()
+    {
+        _count = (_count + 1) % _imgPuth.Count;
+    }    
+    private void GotoBackImg()
+    {
+        _count = (_count + 2) % _imgPuth.Count;
+    }
     private string text { get; set; } = "/Record";
 
     private void GoToRecord()

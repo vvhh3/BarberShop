@@ -40,16 +40,16 @@
     private Client _client = new Client();
     private RecordOfService _record = new RecordOfService();
 
-    private void SaveClient(EditContext args)
+    private async Task SaveClient(EditContext args)
     {
         
-        ef.Add(_client);
-        ef.SaveChanges();
-        GetClientId();
-        ef.Add(_record);
-        ef.SaveChanges();
-        _client = new Client();
-        _record = new RecordOfService();
+       await ef.AddAsync(_client);
+       await ef.SaveChangesAsync();
+       GetClientId();
+       await ef.AddAsync(_record);
+       await ef.SaveChangesAsync();
+       _client = new Client();
+       _record = new RecordOfService();
     }
 
     private void GetClientId()

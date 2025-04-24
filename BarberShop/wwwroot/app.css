@@ -63,7 +63,7 @@ h1:focus {
 
 .Barber{
     max-width: 1920px;
-    height: 2750px;
+    height: 2250px;
     max-height: 2925px;
 }
 .head-text{
@@ -80,6 +80,10 @@ h1:focus {
 .title{
     font-size: 20px;
     color: white;
+    transition: .5s;
+}
+.title:hover{
+    color: #FCA311;
 }
 .head-text-2{
     margin-left: 85px;
@@ -229,40 +233,17 @@ h1:focus {
 .photo-block{
     margin: 50px 70px 0px 70px;
     display: flex;
-    max-width: 1900px;
-    width: 1800px;
-    flex-wrap: wrap;
+justify-content: center;
 }
 .img-block{
-    width: 550px;
-    margin-right: 60px;
+    width: 500px;
     height: 450px;
     margin-bottom: 80px;
 }
-.img-block-1{
-    width: 550px;
-    height: 450px;
-    margin-right: 60px;
-    margin-bottom: 80px;
-}
-.img-block-2{
-    width: 550px;
-    height: 450px;
-    margin-bottom: 80px;
-}
-.img-block-3{
-    width: 550px;
-    height: 450px;
-    margin-right: 60px;
-}
-.img-block-4{
-    width: 550px;
-    height: 450px;
-    margin-right: 60px;
-}
-.img-block-5{
-    width: 550px;
-    height: 450px;
+.btn-img{
+    background: none;
+    border: none;
+    font-size: 30px;
 }
 .footer{
     display: flex;
@@ -299,6 +280,10 @@ h1:focus {
     font-size: 32px;
     color: white;
     text-decoration: none;
+    transition: .5s;
+}
+.feedbeek-text:hover{
+    color: #FCA311;
 }
 .feedbeek-3{
     display: flex;

@@ -27,10 +27,10 @@
 @code {
     private Master _master = new Master();
 
-    public void SubmitMaster(EditContext args)
+    public async Task SubmitMaster(EditContext args)
     {
-        ef.Add(_master);
-        ef.SaveChanges();
-        _master = new Master();
+       await ef.AddAsync(_master);
+       await ef.SaveChangesAsync();
+       _master = new Master();
     }
 }

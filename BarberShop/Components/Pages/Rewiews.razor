@@ -45,10 +45,10 @@
     
     private Back _back = new Back();
 
-    public void SubmitRewiews(EditContext args)
+    public async Task SubmitRewiews(EditContext args)
     {
-        ef.Add(_back);
-        ef.SaveChanges();
+        await ef.AddAsync(_back);
+        await ef.SaveChangesAsync();
         _back = new Back();
     }
 }

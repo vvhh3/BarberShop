@@ -32,22 +32,19 @@
 
     protected override void OnInitialized()
     {
-        _service = ef.Servicess.FirstOrDefault(x => x.Id == Id);
+        _service = ef.Servicess.FirstOrDefault(x => x.Id == Id)?? throw new InvalidOperationException();
     }
 
-    protected void Save()
+    private async Task Save()
     {
-        if (_service is null) return;
-        {
-            ef.Update(_service);
-            ef.SaveChanges();
-        }
+        ef.Update(_service);
+        await ef.SaveChangesAsync();
     }
 
-    public void DeleteService()
+    private async Task DeleteService()
     {
         ef.Remove(_service);
-        ef.SaveChanges();
+        await ef.SaveChangesAsync();
     }
 
     private void GoService()

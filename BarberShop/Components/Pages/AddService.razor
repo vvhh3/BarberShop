@@ -30,10 +30,10 @@
 @code {
     private Service _service = new Service();
     
-    public void Submit(EditContext args)
+    public async Task Submit(EditContext args)
     {
-        ef.Add(_service);
-        ef.SaveChanges();
+        await ef.AddAsync(_service);
+        await ef.SaveChangesAsync();
         _service = new Service();
     }
 }

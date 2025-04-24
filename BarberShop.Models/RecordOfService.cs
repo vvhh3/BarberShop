@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace BarberShop.Models;
 
 public class RecordOfService
-{
+{ 
     [Key]public int Id { get; set; }
     
     public int? ServiceId { get; set; }

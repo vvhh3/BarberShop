@@ -11,15 +11,15 @@
     <th class="tab-td">Время записи</th>
     <th class="tab-td">Удалить</th>
     @foreach (var item in ef.RecordOfServicess
-                  .Include(x => x.Master)
-                  .Include(x => x.Service)
-                  .Include(d => d.Client)
-                  .OrderBy(f => f.Client!.Name)
-                  .ThenBy(d => d.Master!.Name)
-                  .ThenBy(a => a.Service!.Title)
-                  .ThenBy(z => z.DateOfRecord)
-                  .ThenBy(c => c.TimeOfRecord)
-                  .ToList())
+                      .Include(x => x.Master)
+                      .Include(x => x.Service)
+                      .Include(d => d.Client)
+                      .OrderBy(f => f.Client!.Name)
+                      .ThenBy(d => d.Master!.Name)
+                      .ThenBy(a => a.Service!.Title)
+                      .ThenBy(z => z.DateOfRecord)
+                      .ThenBy(c => c.TimeOfRecord)
+                      .ToList())
     {
         <tr>
             <td class="tab-td">@item.Client?.Name</td>
@@ -27,22 +27,20 @@
             <td class="tab-td">@item.Service?.Title</td>
             <td class="tab-td">@item.DateOfRecord.ToString("d")</td>
             <td class="tab-td">@item.TimeOfRecord.ToString("T")</td>
-            <button @onclick="() => DeleteRecord(item.Id)">Удалить</button>
+            <button @onclick="() => Rem(item.Id)">Удалить</button>
         </tr>
     }
 </table>
 
 
 @code {
-
-    private void DeleteRecord(int recordId)
+    
+    private async Task Rem(int recordId)
     {
-            var recordToDelete = ef.RecordOfServicess.Find(recordId);
-            
-            if (recordToDelete != null)
-            {
-                ef.RecordOfServicess.Remove(recordToDelete);
-                ef.SaveChanges();
-            }
+       await ef.RecordOfServicess
+          .Where(c => c.Id == recordId)
+          .ExecuteDeleteAsync();
+     await ef.SaveChangesAsync();
     }
+
 }

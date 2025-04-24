@@ -2,6 +2,7 @@
 @using BarberShop.Models
 @inject NavigationManager NavigationManager
 @using BarberShop.DataBase
+@using Microsoft.AspNetCore.Http.HttpResults
 @inject BarberShopContext ef
 @rendermode InteractiveServer
 @if (_master is not null)
@@ -30,22 +31,21 @@
 
     protected override void OnInitialized()
     {
-        _master = ef.Masters.FirstOrDefault(x => x.Id == Id);
+        _master = ef.Masters.FirstOrDefault(x => x.Id == Id) ?? throw new InvalidOperationException();
     }
 
-    protected void SaveMaster()
+    protected async Task SaveMaster()
     {
-        if (_master is null)return;
-        {
-            ef.Update(_master);
-            ef.SaveChanges();
-        }
+        ef.Update(_master);
+        await ef.SaveChangesAsync(); 
+        StateHasChanged();
     }
 
-    private void DeleteMaster()
+    private async Task DeleteMaster()
     {
         ef.Remove(_master);
-        ef.SaveChanges();
+        await ef.SaveChangesAsync();
+        StateHasChanged();
     }
 
     private void GoToEdit()
