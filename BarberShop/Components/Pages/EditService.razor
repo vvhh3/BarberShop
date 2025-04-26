@@ -19,17 +19,30 @@
     </EditForm>
 }
     <div class="btn-div">
-            <button @onclick="DeleteService" class="btn-delete">УДАЛИТЬ УСЛУГУ</button>
+            <button @onclick="ViewModal" class="btn-delete">УДАЛИТЬ УСЛУГУ</button>
             <button @onclick="GoService" class="btn-delete">ОБРАТНО</button>
     </div>
-
+<ModalWindow Title="Вы уверены что хотите удалить услугу?" OnOk="CloseModal" OnClose="DeleteService" ShowModal="@ShowModal">
+    
+</ModalWindow>
 @code {
     
     private string text { get; set; } = "/AddService";
     [Parameter] public int Id { get; set; }
-
+    private bool ShowModal { get; set; }
+    
     private Service _service;
 
+    private void ViewModal()
+    {
+        ShowModal = true;
+    }
+
+    private void CloseModal()
+    {
+        ShowModal = false;
+    }
+    
     protected override void OnInitialized()
     {
         _service = ef.Servicess.FirstOrDefault(x => x.Id == Id)?? throw new InvalidOperationException();
@@ -45,6 +58,9 @@
     {
         ef.Remove(_service);
         await ef.SaveChangesAsync();
+        await InvokeAsync(StateHasChanged);
+        ShowModal = false;
+        NavigationManager.NavigateTo(text);
     }
 
     private void GoService()

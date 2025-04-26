@@ -18,10 +18,12 @@
         <button type="submit">ИЗМЕНИТЬ МАСТЕРА</button>
     </EditForm>
     <div class="btn-div">
-            <button @onclick="DeleteMaster" class="btn-delete">УДАЛИТЬ МАСТЕРА</button>
+            <button @onclick="ViewModal" class="btn-delete">УДАЛИТЬ МАСТЕРА</button>
             <button @onclick="GoToEdit" class="btn-delete">ОБРАТНО</button>
     </div>
-
+    <ModalWindow Title="Вы уверенны что хотите удалить мастера?" ShowModal="@ShowModal" OnClose="Close" OnOk="DeleteMaster" OkButtonText="Удалить">
+        
+    </ModalWindow>
 }
 
 @code {
@@ -29,6 +31,18 @@
     private string path { get; set; } = "/AddMaster";
     [Parameter]public int Id { get; set; }
 
+    private bool ShowModal { get; set;}
+
+    private void ViewModal()
+    {
+        ShowModal = true;
+    }
+
+    private void Close()
+    {
+        ShowModal = false;
+    }
+    
     protected override void OnInitialized()
     {
         _master = ef.Masters.FirstOrDefault(x => x.Id == Id) ?? throw new InvalidOperationException();
@@ -45,7 +59,9 @@
     {
         ef.Remove(_master);
         await ef.SaveChangesAsync();
-        StateHasChanged();
+        await InvokeAsync(StateHasChanged);
+        ShowModal = false;
+        NavigationManager.NavigateTo(path);
     }
 
     private void GoToEdit()

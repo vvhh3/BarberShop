@@ -7,7 +7,7 @@
 <EditForm Model="_back" FormName="AddRewiews" OnValidSubmit="@SubmitRewiews" class="form">
     <DataAnnotationsValidator></DataAnnotationsValidator>
     <p>Введите текст для отзва</p>
-    <input  class="input" @bind-value="@_back.Text" type="text"/>
+    <input class="input" @bind-value="@_back.Text" type="text"/>
     <p>Введите кол-во звёзд</p>
     <input class="input" @bind-value="@_back.Stars" type="number"/>
     <button type="submit"> ДОБАВИТЬ ОТЗЫВ</button>
@@ -20,29 +20,29 @@
                 <div class="block">
                     <img src="image/master-1.jpg"/>
                     <div class="Rewiews-stars">
-                    @for (int i=0; i<5; i++)
-                    {
-                        @if (i <= @item.Stars)
+                        @for (int i = 0; i < 5; i++)
                         {
-                            <p>★</p>
+                            @if (i <= @item.Stars)
+                            {
+                                <p>★</p>
+                            }
+                            else
+                            {
+                                <p>☆</p>
+                            }
                         }
-                        else
-                        {
-                            <p>☆</p>
-                        }
-                    }</div>
-                @* <p class="Rewiews-stars">@item.Stars</p> *@
+                    </div>
                 </div>
                 <div class="Rewiwews-div-text">
                     <p class="Rewiews-text">@item.Text</p>
-
                 </div>
             </div>
         }
     </div>
-    </div>
+</div>
+
 @code {
-    
+
     private Back _back = new Back();
 
     public async Task SubmitRewiews(EditContext args)
@@ -51,4 +51,5 @@
         await ef.SaveChangesAsync();
         _back = new Back();
     }
+
 }

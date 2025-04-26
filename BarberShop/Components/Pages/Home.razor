@@ -74,8 +74,32 @@
 
 </div>
 
+<button class="btn btn-primary" @onclick="ShowMyModal">Открыть модальное окно</button>
+
+<ModalWindow Title="Подтверждение" ShowModal="@showModal" OnOk="HandleOk" OnClose="HandleClose" OkButtonText="Подтвердить">
+    <p>Вы уверены, что хотите выполнить это действие?</p>
+</ModalWindow>
+
 @code
 {
+    private bool showModal = false;
+
+    private void ShowMyModal()
+    {
+        showModal = true;
+    }
+
+    private void HandleOk()
+    {
+        showModal = false;
+    }
+
+    private void HandleClose()
+    {
+        showModal = false;
+    }
+    
+    
     private IList<string> _imgPuth = new List<string>()
     {
         "image/master-1.jpg",

@@ -1,0 +1,35 @@
+@if (ShowModal)
+{
+    <div class="modal fade show" style="display:block;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">@Title</h5>
+                    <button type="button" class="btn btn-secondary" @onclick="OnClose">Закрыть</button>
+                    <button type="button" class="btn btn-primary" @onclick="OnOk">@OkButtonText</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-backdrop fade show"></div>
+    }
+
+@code {
+    [Parameter]
+    public string Title { get; set; } = "Модальное окно";
+
+    [Parameter]
+    public string OkButtonText { get; set; } = "OK";
+
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
+
+    [Parameter]
+    public EventCallback OnOk { get; set; }
+
+    [Parameter]
+    public EventCallback OnClose { get; set; }
+
+    [Parameter]
+    public bool ShowModal { get; set; } = false;
+}
