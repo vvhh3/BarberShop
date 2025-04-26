@@ -3,7 +3,7 @@
 @using BarberShop.Models
 @inject BarberShopContext ef
 @rendermode InteractiveServer
-
+@inject NavigationManager Navigation
 <EditForm Model="_client" OnValidSubmit="@SaveClient" FormName="FormAddItem" class="form">
     <DataAnnotationsValidator></DataAnnotationsValidator>
     <p>Введите своё имя</p>
@@ -35,14 +35,27 @@
 
     <button type="submit">ЗАПИСАТЬСЯ</button>
 </EditForm>
-
+<ModalWindow Title="Вы успешно записались на стрижку" OnClose="CloseModel" ShowModal="@_showModal" OnOk="OkModel"></ModalWindow>
 @code {
+    private bool _showModal { get; set; }
     private Client _client = new Client();
     private RecordOfService _record = new RecordOfService();
 
+    private string text { get; set; } = "/";
+
+    private void CloseModel()
+    {
+        _showModal = false;       
+        Navigation.NavigateTo(text);
+    }    
+    private void OkModel()
+    {
+        _showModal = false;       
+        Navigation.NavigateTo(text);
+    }
     private async Task SaveClient(EditContext args)
     {
-        
+        _showModal = true;
        await ef.AddAsync(_client);
        await ef.SaveChangesAsync();
        GetClientId();
@@ -50,6 +63,7 @@
        await ef.SaveChangesAsync();
        _client = new Client();
        _record = new RecordOfService();
+
     }
 
     private void GetClientId()

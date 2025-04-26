@@ -10,8 +10,9 @@
     <input class="input" @bind-value="@_back.Text" type="text"/>
     <p>Введите кол-во звёзд</p>
     <input class="input" @bind-value="@_back.Stars" type="number"/>
-    <button type="submit"> ДОБАВИТЬ ОТЗЫВ</button>
+    <button type="submit">ДОБАВИТЬ ОТЗЫВ</button>
 </EditForm>
+<ModalWindow Title="Вы успешно добавили отзыв!!" OnClose="CloseMod" OnOk="ViewModal" ShowModal="@ShowModal"></ModalWindow>
 <div class="Rew">
     <div class="Rewiews">
         @foreach (var item in ef.Backs.ToList())
@@ -44,9 +45,20 @@
 @code {
 
     private Back _back = new Back();
+    private bool ShowModal { get; set; }
 
+    private void ViewModal()
+    {
+        ShowModal = false;
+    }
+
+    private void CloseMod()
+    {
+        ShowModal = false;
+    }
     public async Task SubmitRewiews(EditContext args)
     {
+        ShowModal = true;
         await ef.AddAsync(_back);
         await ef.SaveChangesAsync();
         _back = new Back();
